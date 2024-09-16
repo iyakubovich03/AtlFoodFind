@@ -9,6 +9,7 @@ class Location(models.Model):
     contact_info = models.CharField(max_length=512)
     cuisine_type = models.CharField(max_length=256)
     name = models.CharField(max_length=256)
+    last_update_date = models.DateTimeField
 
     #Average rating, based on reviews
     rating = models.FloatField()

@@ -1,5 +1,6 @@
 from django.db import models
-
+from .api import query_location_id
+from django.utils import timezone
 
 class Location(models.Model):
     # All the ones I tested were length 27, but I'm being generous with field size
@@ -16,6 +17,19 @@ class Location(models.Model):
 
     def __str__(self):
         return self.name
+
+    def update(self):
+        if self.place_id is not None:
+            updates = query_location_id(self.place_id)
+            self.address = updates['formattedAddress']
+            self.contact_info = updates['internationalPhoneNumber']
+            self.rating = updates['rating']
+            self.name = updates['displayName']['text']
+            self.cuisine_type = updates['editorialSummary']['text']
+            self.last_update_date = timezone.now()
+            self.save()
+            #also need to update all the reviews
+
 
 class Review(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE)

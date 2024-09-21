@@ -1,1 +1,6 @@
 API_KEY
+__pycache__
+AtlantaFoodFinder/__pycache__/
+AtlantaFoodFinder/migrations/__pycache__/
+db.sqlite3
+../.idea/

@@ -1,5 +1,5 @@
 from django.db import models
-from .api import query_location_id
+from .api import query_location_id, parse_date, parse_review_id_from_api_name
 from django.utils import timezone
 
 class Location(models.Model):
@@ -18,11 +18,7 @@ class Location(models.Model):
     def __str__(self):
         return self.name
 
-    def update(self):
-        self._update_fields()
-        self.save()
-
-    def _update_fields(self):
+    def update_from_web(self):
         updates = query_location_id(self.place_id)
         self.address = updates['formattedAddress']
         self.contact_info = updates['internationalPhoneNumber']
@@ -30,7 +26,9 @@ class Location(models.Model):
         self.name = updates['displayName']['text']
         self.cuisine_type = updates['editorialSummary']['text']
         self.last_update_date = timezone.now()
-        #also need to update all the reviews
+        for review_json in updates['reviews']:
+            Review.add_if_not_in_db(self, review_json)
+        self.save()
 
     @classmethod
     def get_or_init(_class, id):
@@ -39,16 +37,35 @@ class Location(models.Model):
             return database_result
         except Location.DoesNotExist:
             new_result = Location.objects.create(place_id=id)
-            new_result.update()
+            new_result.update_from_web()
             return new_result
 
 
 class Review(models.Model):
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    score = models.IntegerField()
-    user = models.CharField(max_length=128)
-    date = models.DateTimeField()
-    text = models.CharField(max_length=1024)
+    review_id = models.CharField(max_length=64, primary_key=True, default="")
+    #Can be null since there's no good default. However, shouldn't ever be null
+    #if the review is properly constructed
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
+    score = models.IntegerField(default=0)
+    user = models.CharField(max_length=128, default="")
+    date = models.DateTimeField(default=timezone.now)
+    text = models.CharField(max_length=1024, default="")
 
     def __str__(self):
         return self.user + " says " + self.text
+
+    def update_from_json(self, review_json):
+        self.score = review_json['rating']
+        self.text = review_json['text']['text']
+        self.user = review_json['authorAttribution']['displayName']
+        self.data = parse_date(review_json['publishTime'])
+        self.save()
+
+    @classmethod
+    def add_if_not_in_db(_class, location, review_json):
+        id = parse_review_id_from_api_name(review_json['name'])
+        try:
+            database_result = Review.objects.get(review_id=id)
+        except Review.DoesNotExist:
+            new_review = Review.objects.create(location=location, review_id=id)
+            new_review.update_from_json(review_json)

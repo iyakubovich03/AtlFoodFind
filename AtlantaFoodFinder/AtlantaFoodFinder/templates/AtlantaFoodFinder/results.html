@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+</head>
+<body>
+<h1>results will be displayed here from the search</h1>
+ <form method="POST" action="/places/">
+        {% csrf_token %}
+        <label for="search_term">Search Term:</label>
+        <input type="text" id="search_term" name="search_term" placeholder="e.g. restaurant" required>
+        <button type="submit">Search</button>
+    </form>
+<h2>Results:</h2>
+    <ul>
+        {% for place in results.places %}
+            <li>{{ place.displayName.text }}</li>
+        {% empty %}
+            <li>No places found.</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

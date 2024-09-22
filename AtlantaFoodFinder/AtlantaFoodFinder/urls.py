@@ -17,9 +17,12 @@ Including another URLconf
 from django.urls import path
 from django.contrib import admin
 from . import views
+from requests import request
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path("locations/<pk>/", views.LocationView.as_view(), name="location"),
+    path("places/", views.search_restaurants, name="results")
+    #path("search/", views.search_restaurants(request), name="search")
 ]

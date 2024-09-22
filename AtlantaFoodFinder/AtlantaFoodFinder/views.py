@@ -16,7 +16,11 @@ class LocationView(generic.DetailView):
     template_name = "AtlantaFoodFinder/location.html"
 
 def search_restaurants(request):
-   cuisine = request.POST.get('cuisine', 'restaurant')  # based on search bar (type of cuisine)
+   cuisine = request.POST.get('search_term', 'restaurant')
+   if cuisine != "restaurant":
+       cuisine+="_restaurant"
+
+    # based on search bar (type of cuisine)
    api_key = get_api_key()
    radius = 5000
    api_url="https://places.googleapis.com/v1/places:searchNearby"
@@ -30,8 +34,8 @@ def search_restaurants(request):
      "locationRestriction": {
        "circle": {
          "center": {
-           "latitude": 37.7937,
-           "longitude": -122.3965
+           "latitude": 33.7490,
+           "longitude": -84.3880
          },
          "radius": radius
        }
@@ -50,9 +54,12 @@ def search_restaurants(request):
    if response.status_code == 200:
        results = response.json()
    else:
-       results = {"error": "Unable to fetch data"}
+
+       results = response.json()
 
 
 
 
-   return render(request, 'results.html', {'results': results})
+   return render(request, 'AtlantaFoodFinder/results.html', {'results': results})
+def my_html_view(request):
+    return render(request, 'AtlantaFoodFinder/results.html')

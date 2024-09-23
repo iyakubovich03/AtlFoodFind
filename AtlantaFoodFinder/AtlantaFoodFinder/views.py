@@ -11,9 +11,8 @@ def index(request):
     print(Location.get_or_init("ChIJJ2iPNY27EmsR45MJL04zqTc"))
     return HttpResponse("Home page")
 
-class LocationView(generic.DetailView):
-    model = Location
-    template_name = "AtlantaFoodFinder/location.html"
+def location_detail(request, pk):
+    return render(request, 'AtlantaFoodFinder/location.html', {'location': Location.get_or_init(pk)})
 
 def search_restaurants(request):
    cuisine = request.POST.get('search_term', 'restaurant')

@@ -44,11 +44,14 @@ def search_restaurants(request):
    header = {
    "Content-Type": 'application/json',
    "X-Goog-Api-Key": api_key,
-   "X-Goog-FieldMask": "places.displayName"
+   "X-Goog-FieldMask": "places.displayName,places.name"
    }
 
 
+
+
    response = requests.post(api_url, headers=header, data=json.dumps(data))
+
 
 
    if response.status_code == 200:

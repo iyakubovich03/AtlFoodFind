@@ -15,7 +15,11 @@
 <h2>Results:</h2>
     <ul>
         {% for place in results.places %}
-            <li>{{ place.displayName.text }}</li>
+            <li>
+                <a href = "{% url 'location' place.name|slice:'7:' %}">{{ place.displayName.text }}</a>
+            </li>
+           
+            
         {% empty %}
             <li>No places found.</li>
         {% endfor %}

@@ -28,4 +28,6 @@ urlpatterns = [
     #path("search/", views.search_restaurants(request), name="search")
     path("accounts/", include("django.contrib.auth.urls")),
     path("accounts/profile/", views.UserView.as_view(), name="profile"),
+    path("locations/<pk>/addFavorite", views.add_favorite, name="addFavorite"),
+    path("locations/<pk>/removeFavorite", views.remove_favorite, name="removeFavorite"),
 ]

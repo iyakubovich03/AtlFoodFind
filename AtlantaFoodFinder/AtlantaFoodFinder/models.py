@@ -72,7 +72,12 @@ class Review(models.Model):
             new_review.update_from_json(review_json)
 
 class Account(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     favorites = models.ManyToManyField(Location, blank=True)
     def add_favorite(self, location):
         self.favorites.add(location)
+        self.save()
+
+    def remove_favorite(self, location):
+        self.favorites.remove(location)
+        self.save()

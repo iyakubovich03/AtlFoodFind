@@ -1,2 +1,13 @@
 <p>{{ location.name }}</p>
-<a href="{%  url "location" location.pk %}">click link</a>
+<a href="{% url "location" location.pk %}">click link</a>
+{% if isFavorite %}
+    <form action="{% url 'removeFavorite' location.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Remove from favorites</button>
+    </form>
+{% else %}
+    <form action="{% url 'addFavorite' location.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Add to favorites</button>
+    </form>
+{% endif %}

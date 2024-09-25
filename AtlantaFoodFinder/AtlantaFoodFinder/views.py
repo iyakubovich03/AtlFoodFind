@@ -1,10 +1,12 @@
-from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
-from .models import Location
+from .models import Location, Account
 from django.shortcuts import render
 import requests
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
 
 
 from .secrets import get_api_key
@@ -14,13 +16,43 @@ def index(request):
     return HttpResponse("Home page")
 
 def location_detail(request, pk):
-    return render(request, 'AtlantaFoodFinder/location.html', {'location': Location.get_or_init(pk)})
+    return render(request, 'AtlantaFoodFinder/location.html',
+                  {'location': Location.get_or_init(pk), 'isFavorite': is_favorite(request, pk)})
+
+def is_favorite(request, pk):
+    if hasattr(request.user, "account"):
+        if request.user.account.favorites.contains(Location.get_or_init(pk)):
+            return True
+    return False
 
 class UserView(LoginRequiredMixin, generic.DetailView):
     model = User
     template_name = "AtlantaFoodFinder/profile.html"
     def get_object(self, queryset=None):
         return self.request.user
+
+#pk is key of the location
+@login_required
+def add_favorite(request, pk):
+    if request.method != 'POST':
+        return HttpResponse(405) #not allowed
+    else:
+        if hasattr(request.user, "account"):
+            request.user.account.add_favorite(Location.get_or_init(pk))
+        else:
+            account = Account.objects.create(user=request.user)
+            account.add_favorite(Location.objects.get_or_init(pk))
+        return HttpResponseRedirect(reverse("location", kwargs={"pk":pk}))
+
+@login_required
+def remove_favorite(request, pk):
+    if request.method != 'POST':
+        return HttpResponse(405) #not allowed
+    else:
+        if hasattr(request.user, "account"):
+            request.user.account.remove_favorite(Location.get_or_init(pk))
+            # no else condition since don't need to create an account if they just want to remove
+        return HttpResponseRedirect(reverse("location", kwargs={"pk":pk}))
 
 def search_restaurants(request):
    cuisine = request.POST.get('search_term', 'restaurant')

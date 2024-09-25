@@ -5,6 +5,11 @@ body {
     padding: 0;
     background-color: #f8f8f8;
     color: #333;
+    background-image: url('images/restauraunt-homepage.jpg');
+    background-size: cover;  /* Ensures the image covers the entire page */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed;
 }
 
 header {

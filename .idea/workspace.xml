@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1569efb-fa0e-4625-88ed-cb2443ccfc63" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/AtlantaFoodFinder/AtlantaFoodFinder/templates/AtlantaFoodFinder/favorites.css" beforeDir="false" afterPath="$PROJECT_DIR$/AtlantaFoodFinder/AtlantaFoodFinder/templates/AtlantaFoodFinder/favorites.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AtlantaFoodFinder/AtlantaFoodFinder/templates/AtlantaFoodFinder/favorites.html" beforeDir="false" afterPath="$PROJECT_DIR$/AtlantaFoodFinder/AtlantaFoodFinder/templates/AtlantaFoodFinder/favorites.html" afterDir="false" />
-    </list>
+    <list default="true" id="a1569efb-fa0e-4625-88ed-cb2443ccfc63" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

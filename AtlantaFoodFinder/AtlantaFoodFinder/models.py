@@ -41,6 +41,9 @@ class Location(models.Model):
             new_result.update_from_web()
             return new_result
 
+    def display(self):
+        return self.__str__()
+
 
 class Review(models.Model):
     review_id = models.CharField(max_length=64, primary_key=True, default="")

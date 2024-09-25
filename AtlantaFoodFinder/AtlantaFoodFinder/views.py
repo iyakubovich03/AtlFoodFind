@@ -30,8 +30,25 @@ def is_favorite(request, pk):
 class UserView(LoginRequiredMixin, generic.DetailView):
     model = User
     template_name = "AtlantaFoodFinder/profile.html"
+
     def get_object(self, queryset=None):
         return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super(UserView, self).get_context_data(**kwargs)
+        context['favorites_empty'] = self.favorites_empty(self.request.user)
+        return context
+
+    def favorites_empty(self, user):
+        if not hasattr(user, "account"):
+            return True
+        else:
+            favorites = user.account.favorites.all()
+            if len(favorites) == 0:
+                return True
+            else:
+                return False
+
 
 #pk is key of the location
 @login_required
@@ -62,13 +79,11 @@ def account_creation(request):
     else:
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = User.objects.create_user(username=form.cleaned_data['username'], email=form.cleaned_data['email'], password=form.cleaned_data['<PASSWORD>'])
+            user = User.objects.create_user(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
             user.save()
             login(request, user)
             return HttpResponseRedirect(reverse("profile"))
         else:
-            for msg in form.errors:
-                print(msg)
             return render(request, "registration/register.html", {"form": form})
 
 def search_restaurants(request):

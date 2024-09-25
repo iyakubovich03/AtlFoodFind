@@ -3,6 +3,8 @@ from django.views import generic
 from .models import Location
 from django.shortcuts import render
 import requests
+from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 from .secrets import get_api_key
@@ -13,6 +15,12 @@ def index(request):
 
 def location_detail(request, pk):
     return render(request, 'AtlantaFoodFinder/location.html', {'location': Location.get_or_init(pk)})
+
+class UserView(LoginRequiredMixin, generic.DetailView):
+    model = User
+    template_name = "AtlantaFoodFinder/profile.html"
+    def get_object(self, queryset=None):
+        return self.request.user
 
 def search_restaurants(request):
    cuisine = request.POST.get('search_term', 'restaurant')

@@ -1,6 +1,7 @@
 from django.db import models
 from .api import query_location_id, parse_date, parse_review_id_from_api_name
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Location(models.Model):
     # All the ones I tested were length 27, but I'm being generous with field size
@@ -69,3 +70,9 @@ class Review(models.Model):
         except Review.DoesNotExist:
             new_review = Review.objects.create(location=location, review_id=id)
             new_review.update_from_json(review_json)
+
+class Account(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    favorites = models.ManyToManyField(Location, blank=True)
+    def add_favorite(self, location):
+        self.favorites.add(location)

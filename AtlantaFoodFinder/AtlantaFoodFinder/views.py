@@ -54,7 +54,7 @@ class UserView(LoginRequiredMixin, generic.DetailView):
 @login_required
 def add_favorite(request, pk):
     if request.method != 'POST':
-        return HttpResponse(405) #not allowed
+        return HttpResponseRedirect(reverse("location", kwargs={"pk":pk}))
     else:
         if hasattr(request.user, "account"):
             request.user.account.add_favorite(Location.get_or_init(pk))
@@ -66,7 +66,7 @@ def add_favorite(request, pk):
 @login_required
 def remove_favorite(request, pk):
     if request.method != 'POST':
-        return HttpResponse(405) #not allowed
+        return HttpResponseRedirect(reverse("location", kwargs={"pk":pk}))
     else:
         if hasattr(request.user, "account"):
             request.user.account.remove_favorite(Location.get_or_init(pk))

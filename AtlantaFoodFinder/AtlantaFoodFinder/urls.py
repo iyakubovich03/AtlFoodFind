@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib.auth.decorators import login_required
 from django.urls import path
 from django.contrib import admin
+
 from . import views
 from django.urls import include
 
@@ -30,4 +31,5 @@ urlpatterns = [
     path("accounts/profile/", views.UserView.as_view(), name="profile"),
     path("locations/<pk>/addFavorite", views.add_favorite, name="addFavorite"),
     path("locations/<pk>/removeFavorite", views.remove_favorite, name="removeFavorite"),
+    path("accounts/create", views.account_creation, name="signUp")
 ]

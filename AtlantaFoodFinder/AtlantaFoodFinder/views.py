@@ -1,4 +1,6 @@
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from .models import Location, Account
@@ -53,6 +55,21 @@ def remove_favorite(request, pk):
             request.user.account.remove_favorite(Location.get_or_init(pk))
             # no else condition since don't need to create an account if they just want to remove
         return HttpResponseRedirect(reverse("location", kwargs={"pk":pk}))
+
+def account_creation(request):
+    if request.method != 'POST':
+        return render(request, "registration/register.html", {"form":UserCreationForm})
+    else:
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(username=form.cleaned_data['username'], email=form.cleaned_data['email'], password=form.cleaned_data['<PASSWORD>'])
+            user.save()
+            login(request, user)
+            return HttpResponseRedirect(reverse("profile"))
+        else:
+            for msg in form.errors:
+                print(msg)
+            return render(request, "registration/register.html", {"form": form})
 
 def search_restaurants(request):
    cuisine = request.POST.get('search_term', 'restaurant')

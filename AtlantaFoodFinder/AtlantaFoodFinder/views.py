@@ -29,7 +29,7 @@ def is_favorite(request, pk):
 
 class UserView(LoginRequiredMixin, generic.DetailView):
     model = User
-    template_name = "AtlantaFoodFinder/profile.html"
+    template_name = "AtlantaFoodFinder/profile_demo.html"
 
     def get_object(self, queryset=None):
         return self.request.user

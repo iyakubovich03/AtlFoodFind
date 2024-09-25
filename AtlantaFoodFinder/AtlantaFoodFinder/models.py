@@ -25,7 +25,11 @@ class Location(models.Model):
         self.contact_info = updates['internationalPhoneNumber']
         self.rating = updates['rating']
         self.name = updates['displayName']['text']
-        self.cuisine_type = updates['editorialSummary']['text']
+        try:
+            self.cuisine_type = updates['editorialSummary']['text']
+        except KeyError:
+            #Don't add it or anything
+            pass
         self.last_update_date = timezone.now()
         for review_json in updates['reviews']:
             Review.add_if_not_in_db(self, review_json)

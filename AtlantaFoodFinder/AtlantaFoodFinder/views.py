@@ -12,7 +12,9 @@ def index(request):
     return HttpResponse("Home page")
 
 def location_detail(request, pk):
-    return render(request, 'AtlantaFoodFinder/location.html', {'location': Location.get_or_init(pk)})
+    apikey=get_api_key()
+    address = "https://maps.googleapis.com/maps/api/js?key="+apikey+"&libraries=maps,marker&v=beta"
+    return render(request, 'AtlantaFoodFinder/location.html', {'location': Location.get_or_init(pk),'address': address})
 
 def search_restaurants(request):
    cuisine = request.POST.get('search_term', 'restaurant')

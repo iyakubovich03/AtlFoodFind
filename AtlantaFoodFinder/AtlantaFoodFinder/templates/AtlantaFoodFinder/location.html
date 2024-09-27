@@ -1,2 +1,31 @@
-<p>{{ location.name }}</p>
-<a href="{%  url "location" location.pk %}">click link</a>
+<html lang="en">
+<head>
+    <title>
+        Details + Maps
+    </title>
+    <script
+        src = "{{ address }}"
+        defer
+    ></script>
+</head>
+<body>
+    <p>{{ location.name }}</p>
+    <a href="{%  url "location" location.pk %}">click link</a>
+    <gmp-map 
+            center="33.774607,-84.406383"  # insert unique address here
+             zoom="15" 
+             map-id="DEMO_MAP_ID" 
+             style="height: 400px"
+    >
+        <gmp-advanced-marker
+        position="33.774607,-84.406383" #place the adress here will put markeer
+        title="WokChi, Atlanta,  GA"
+      ></gmp-advanced-marker>
+    </gmp-map>
+      
+   
+    
+</body>
+
+</html>
+

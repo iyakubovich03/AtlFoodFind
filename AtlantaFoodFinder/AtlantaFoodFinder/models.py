@@ -16,6 +16,9 @@ class Location(models.Model):
     #Average rating, based on reviews
     rating = models.FloatField(default=0.0)
 
+    longitude = models.FloatField(default=0.0)
+    latitude = models.FloatField(default=0.0)
+
     def __str__(self):
         return self.name
 
@@ -25,6 +28,8 @@ class Location(models.Model):
         self.contact_info = updates['internationalPhoneNumber']
         self.rating = updates['rating']
         self.name = updates['displayName']['text']
+        self.longitude = updates['location']['longitude']
+        self.latitude = updates['location']['latitude']
         try:
             self.cuisine_type = updates['editorialSummary']['text']
         except KeyError:

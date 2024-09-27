@@ -18,8 +18,11 @@ def index(request):
     return HttpResponse("Home page")
 
 def location_detail(request, pk):
+    apikey = get_api_key()
+    address = "https://maps.googleapis.com/maps/api/js?key=" + apikey + "&libraries=maps,marker&v=beta"
+
     return render(request, 'AtlantaFoodFinder/location.html',
-                  {'location': Location.get_or_init(pk), 'isFavorite': is_favorite(request, pk)})
+                  {'location': Location.get_or_init(pk), 'isFavorite': is_favorite(request, pk),"address": address})
 
 def is_favorite(request, pk):
     if hasattr(request.user, "account"):

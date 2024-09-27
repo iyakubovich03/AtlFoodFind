@@ -1,3 +1,14 @@
+<html lang="en">
+<head>
+   <title>
+       Details + Maps
+   </title>
+   <script
+       src = "{{ address }}"
+       defer
+   ></script>
+</head>
+<body>
 
 <p>{{ location.name }}</p>
 <a href="{% url "location" location.pk %}">click link</a>
@@ -12,4 +23,23 @@
         <button type="submit">Add to favorites</button>
     </form>
 {% endif %}
+  <gmp-map
+           center="{{ location.latitude }},{{ location.longitude }}"  # insert unique address here
+            zoom="15"
+            map-id="DEMO_MAP_ID"
+            style="height: 400px"
+   >
+       <gmp-advanced-marker
+       position="{{ location.latitude }},{{ location.longitude }}" #place the adress here will put markeer
+       title="{{ location.address}}"
+     ></gmp-advanced-marker>
+   </gmp-map>
+
+    
+ 
+  
+</body>
+
+
+</html>
 

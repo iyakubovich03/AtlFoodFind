@@ -3,10 +3,6 @@
    <title>
        Details + Maps
    </title>
-   <script
-       src = "{{ address }}"
-       defer
-   ></script>
 </head>
 <body>
 
@@ -23,19 +19,15 @@
         <button type="submit">Add to favorites</button>
     </form>
 {% endif %}
-  <gmp-map
-           center="{{ location.latitude }},{{ location.longitude }}"  # insert unique address here
-            zoom="15"
-            map-id="DEMO_MAP_ID"
-            style="height: 400px"
-   >
-       <gmp-advanced-marker
-       position="{{ location.latitude }},{{ location.longitude }}" #place the adress here will put markeer
-       title="{{ location.address}}"
-     ></gmp-advanced-marker>
-   </gmp-map>
 
-    
+<iframe
+  width="600"
+  height="400"
+  frameborder="0" style="border:0"
+  referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/place?key={{ api_key }}&q=place_id:{{ location.place_id }}"
+  allowfullscreen>
+</iframe>
  
   
 </body>

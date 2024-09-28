@@ -61,7 +61,7 @@ def add_favorite(request, pk):
             request.user.account.add_favorite(Location.get_or_init(pk))
         else:
             account = Account.objects.create(user=request.user)
-            account.add_favorite(Location.objects.get_or_init(pk))
+            account.add_favorite(Location.get_or_init(pk))
         return HttpResponseRedirect(reverse("location", kwargs={"pk":pk}))
 
 @login_required

@@ -16,46 +16,66 @@ body {
 header {
     background-color: #333;
     color: #fff;
-    padding: 20px 0;
+    padding: 5px 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 1);
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10%;
+    padding: 0 2%;
 }
 
 nav .logo h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 24px;
+    font-family: 'Fugaz One', cursive;
+    font-size: 30px;
+    color: #EE3A43;
+    padding-left: 50px;
 }
 
 nav .nav-links {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 80px;
 }
 
 nav .nav-links li a {
     color: #fff;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
 }
 
 nav .nav-links li a:hover {
     color: #FFD700;
 }
 
+.link-button {
+    background-color: #333;
+    border: none;
+    list-style: none;
+    display: flex;
+    gap: 80px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.link-button:hover {
+    color: #FFD700;
+}
+
 .profile-container {
     background-color: #FFD6D6; /* Light pink background */
     flex: 1;
-    padding: 30px;
     width: 100%;
 
 }
 
-.account-section {
+.favorite-section {
     max-width: 600px;
     margin: 0;
     background-color: white;
@@ -64,12 +84,16 @@ nav .nav-links li a:hover {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+main {
+    padding: 30px;
+}
+
 h2 {
     font-size: 24px;
     margin-bottom: 20px;
 }
 
-.account-info {
+.favorite-info {
     margin-bottom: 20px;
 }
 

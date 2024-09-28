@@ -136,6 +136,4 @@ def search_restaurants(request):
 
 
 
-   return render(request, 'AtlantaFoodFinder/results_homepage.html', {'search_text': request.POST.get('search_term'),'results': results})
-def my_html_view(request):
-    return render(request, 'AtlantaFoodFinder/results.html')
+   return render(request, 'AtlantaFoodFinder/results.html', {'search_text': request.POST.get('search_term'), 'results': results})

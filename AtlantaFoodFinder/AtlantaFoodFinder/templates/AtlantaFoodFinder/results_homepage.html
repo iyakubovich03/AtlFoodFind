@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'AtlantaFoodFinder/homepage.css' %}"> <!-- Link your CSS file here -->
+    <link rel="stylesheet" href="{% static 'AtlantaFoodFinder/results_homepage.css' %}"> <!-- Link your CSS file here -->
     <title>Atlanta Food Finder</title>
 
 </head>
@@ -39,17 +39,21 @@
 
     <main>
         <section class="hero">
-            <h2>Search for the</h2>
-            <h3>Best Food in Atlanta</h3>
-            <p>FIND THE TOP RATED RESTAURANTS THROUGHOUT THE CITY</p>
             <form class="search-form" method="POST" action="/places/">
                 {% csrf_token %}
-                <input type="text" id="search_term" name="search_term" placeholder="Enter a cuisine, name, or location..." required/>
+                <input type="text" id="search_term" name="search_term" value="{{ search_text }}" placeholder="Enter a cuisine, name, or location..." required/>
                 <input type="image" id="submit" src="../../static/AtlantaFoodFinder/images/search-icon.png" alt="Search" />
             </form>
         </section>
-
-
+        {% for place in results.places %}
+            <div class="restaurant">
+                <h3>
+                    <a href = "{% url 'location' place.name|slice:'7:' %}">{{ place.displayName.text }}</a>
+                </h3>
+            </div>
+        {% empty %}
+            <li>No places found.</li>
+        {% endfor %}
     </main>
     <footer>
         <p>&copy; 2024 Atlanta Food Finder. All rights reserved.</p>

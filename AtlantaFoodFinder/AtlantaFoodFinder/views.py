@@ -14,8 +14,7 @@ from django.urls import reverse
 from .secrets import get_api_key
 import json
 def index(request):
-    print(Location.get_or_init("ChIJJ2iPNY27EmsR45MJL04zqTc"))
-    return HttpResponse("Home page")
+    return render(request, "AtlantaFoodFinder/homepage.html")
 
 def location_detail(request, pk):
     api_key = get_api_key()
@@ -31,7 +30,7 @@ def is_favorite(request, pk):
 
 class UserView(LoginRequiredMixin, generic.DetailView):
     model = User
-    template_name = "AtlantaFoodFinder/profile_demo.html"
+    template_name = "AtlantaFoodFinder/profile.html"
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -137,6 +136,6 @@ def search_restaurants(request):
 
 
 
-   return render(request, 'AtlantaFoodFinder/results.html', {'results': results})
+   return render(request, 'AtlantaFoodFinder/results_homepage.html', {'search_text': request.POST.get('search_term'),'results': results})
 def my_html_view(request):
     return render(request, 'AtlantaFoodFinder/results.html')

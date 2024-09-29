@@ -1,6 +1,7 @@
 from django.db import models
 from .api import query_location_id, parse_date, parse_review_id_from_api_name
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Location(models.Model):
     # All the ones I tested were length 27, but I'm being generous with field size
@@ -15,6 +16,9 @@ class Location(models.Model):
     #Average rating, based on reviews
     rating = models.FloatField(default=0.0)
 
+    longitude = models.FloatField(default=0.0)
+    latitude = models.FloatField(default=0.0)
+
     def __str__(self):
         return self.name
 
@@ -24,7 +28,13 @@ class Location(models.Model):
         self.contact_info = updates['internationalPhoneNumber']
         self.rating = updates['rating']
         self.name = updates['displayName']['text']
-        self.cuisine_type = updates['editorialSummary']['text']
+        self.longitude = updates['location']['longitude']
+        self.latitude = updates['location']['latitude']
+        try:
+            self.cuisine_type = updates['editorialSummary']['text']
+        except KeyError:
+            #Don't add it or anything
+            pass
         self.last_update_date = timezone.now()
         for review_json in updates['reviews']:
             Review.add_if_not_in_db(self, review_json)
@@ -39,6 +49,9 @@ class Location(models.Model):
             new_result = Location.objects.create(place_id=id)
             new_result.update_from_web()
             return new_result
+
+    def display(self):
+        return self.__str__()
 
 
 class Review(models.Model):
@@ -69,3 +82,14 @@ class Review(models.Model):
         except Review.DoesNotExist:
             new_review = Review.objects.create(location=location, review_id=id)
             new_review.update_from_json(review_json)
+
+class Account(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    favorites = models.ManyToManyField(Location, blank=True)
+    def add_favorite(self, location):
+        self.favorites.add(location)
+        self.save()
+
+    def remove_favorite(self, location):
+        self.favorites.remove(location)
+        self.save()

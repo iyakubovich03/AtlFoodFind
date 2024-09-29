@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +8,8 @@
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="homepage.css"> <!-- Link your CSS file here -->
+    <link rel="stylesheet" href="{% static 'AtlantaFoodFinder/homepage.css' %}"> <!-- Link your CSS file here -->
     <title>Atlanta Food Finder</title>
-    <style>
-        body {
-            background-image: url('images/restauraunt-homepage.jpg');
-            background-size: cover; /* Makes the background cover the whole page */
-            background-repeat: no-repeat; /* Prevents the image from repeating */
-            background-position: center; /* Centers the image */
-        }
-    </style>
 
 </head>
 <body>
@@ -26,10 +19,20 @@
                 <h1>Atlanta Food Finder</h1>
             </div>
             <ul class="nav-links">
-                <li><a href="homepage.html">Home</a></li>
-                <li><a href="map.html">Map</a></li>
-                <li><a href="favorites.html">Favorites</a></li>
-                <input href="login.html" type="image" src="images/log-in-button.png" alt="Log In" />
+                <li><a href="{% url "index" %}">Home</a></li>
+                <li><a href="{% url "profile" %}">Profile</a></li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <form id="logout-form" method="post" action="{% url "logout" %}">
+                            {% csrf_token %}
+                            <button type="submit" class="link-button">Logout</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url "login" %}">
+                        Login
+                    </a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
@@ -39,17 +42,18 @@
             <h2>Search for the</h2>
             <h3>Best Food in Atlanta</h3>
             <p>FIND THE TOP RATED RESTAURANTS THROUGHOUT THE CITY</p>
-            <form class="search-form">
-                <input type="text" id="name" placeholder="Name of Restaurant" />
-                <input type="text" id="type" placeholder="Cuisine Type" />
-                <input type="text" id="location" placeholder="Location" />
-                <input type="image" src="images/search-icon.png" alt="Search" />
+            <form class="search-form" method="POST" action="/places/">
+                {% csrf_token %}
+                <input type="text" id="search_term" name="search_term" placeholder="Enter a cuisine, name, or location..." required/>
+                <input type="image" id="submit" src="../../static/AtlantaFoodFinder/images/search-icon.png" alt="Search" />
             </form>
         </section>
 
 
     </main>
+    <footer>
+        <p>&copy; 2024 Atlanta Food Finder. All rights reserved.</p>
+    </footer>
 
-    
 </body>
 </html>

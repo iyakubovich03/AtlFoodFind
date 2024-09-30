@@ -44,20 +44,31 @@
             <p>FIND THE TOP RATED RESTAURANTS THROUGHOUT THE CITY</p>
             <form class="search-form" method="POST" action="/places/">
                 {% csrf_token %}
-                <input type="text" id="search_term" name="search_term" placeholder="Enter a cuisine, name, or location..." required/>
-                 <br>
+                <input type="text" id="search_term" name="search_term" value="{{ search_text }}" placeholder="Enter a cuisine, name, or location..." required/>
                 <label>
-                    <input type="checkbox" name="filter_rating" value="1"> Filter by rating (4.0+)
+                    <input type="radio" name="sort_option" id = "rating" value="rating">
+                    Rating
                 </label>
-                <br>
                 <label>
-                    <input type="checkbox" name="filter_distance" value="1"> Filter by distance (5km)
+                <input type="radio" name="sort_option" id ="distance" value="distance">
+                Distance
                 </label>
-                <br>
-                <input type="image" id="submit" src="../../static/AtlantaFoodFinder/images/search-icon.png" alt="Search" />
+                <input type="image" id="submit" src="../../../static/AtlantaFoodFinder/images/search-icon.png" alt="Search" />
             </form>
         </section>
-
+        <div class="restaurant-list">
+            {% for place in results%}
+                <div class="restaurant">
+                    <h3>
+                        <a href = "{% url 'location' place.placeId|slice:'7:' %}">{{ place.name }}</a>
+                    </h3>
+                    <p>{{ place.rating }}</p>
+                    <p>{{ place.distance_km }}</p>
+                </div>
+            {% empty %}
+                <li>No places found.</li>
+            {% endfor %}
+        </div>
 
     </main>
     <footer>

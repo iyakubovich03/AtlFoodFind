@@ -97,23 +97,19 @@ def search_restaurants(request):
     # based on search bar (type of cuisine)
    api_key = get_api_key()
    radius = 5000
-   api_url="https://places.googleapis.com/v1/places:searchNearby"
-
+   api_url="https://places.googleapis.com/v1/places:searchText"
 
    data = {
-     "includedTypes": [
-       cuisine
-     ],
-     "maxResultCount": 10,
-     "locationRestriction": {
-       "circle": {
-         "center": {
-           "latitude": 33.7490,
-           "longitude": -84.3880
-         },
-         "radius": radius
+       "textQuery": cuisine,
+       "locationBias": {
+           "circle": {
+               "center": {
+                   "latitude": 33.7490,
+                   "longitude":  -84.3880
+               },
+               "radius": 500.0
+           }
        }
-     }
    }
    header = {
    "Content-Type": 'application/json',

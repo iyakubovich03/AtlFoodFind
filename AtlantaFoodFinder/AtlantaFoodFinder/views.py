@@ -14,8 +14,7 @@ from django.urls import reverse
 from .secrets import get_api_key
 import json
 def index(request):
-    print(Location.get_or_init("ChIJJ2iPNY27EmsR45MJL04zqTc"))
-    return HttpResponse("Home page")
+    return render(request, "AtlantaFoodFinder/homepage.html")
 
 def location_detail(request, pk):
     api_key = get_api_key()
@@ -31,7 +30,7 @@ def is_favorite(request, pk):
 
 class UserView(LoginRequiredMixin, generic.DetailView):
     model = User
-    template_name = "AtlantaFoodFinder/profile_demo.html"
+    template_name = "AtlantaFoodFinder/profile.html"
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -62,7 +61,7 @@ def add_favorite(request, pk):
             request.user.account.add_favorite(Location.get_or_init(pk))
         else:
             account = Account.objects.create(user=request.user)
-            account.add_favorite(Location.objects.get_or_init(pk))
+            account.add_favorite(Location.get_or_init(pk))
         return HttpResponseRedirect(reverse("location", kwargs={"pk":pk}))
 
 @login_required
@@ -133,6 +132,4 @@ def search_restaurants(request):
 
 
 
-   return render(request, 'AtlantaFoodFinder/results.html', {'results': results})
-def my_html_view(request):
-    return render(request, 'AtlantaFoodFinder/results.html')
+   return render(request, 'AtlantaFoodFinder/results.html', {'search_text': request.POST.get('search_term'), 'results': results})

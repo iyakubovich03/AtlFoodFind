@@ -1,0 +1,169 @@
+/* LOGIN FORM */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FFD6D6; /* Light pink background */
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 5px 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2%;
+}
+
+nav .logo h1 {
+    font-family: 'Fugaz One', cursive;
+    font-size: 30px;
+    color: #EE3A43;
+    padding-left: 50px;
+}
+
+nav .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 80px;
+}
+
+nav .nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
+}
+
+nav .nav-links li a:hover {
+    color: #FFD700;
+}
+
+.link-button {
+    background-color: #333;
+    border: none;
+    list-style: none;
+    display: flex;
+    gap: 80px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.link-button:hover {
+    color: #FFD700;
+}
+
+.form-row {
+    padding: 4px 0;
+}
+
+.form-row label {
+    display: block;
+    line-height: 2em;
+}
+
+.form-row #id_username, .form-row #id_password {
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.submit-row {
+    padding: 1em 0 0 0;
+    margin: 0;
+    text-align: center;
+}
+
+.login .password-reset-link {
+    text-align: center;
+}
+
+body .login-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    background-color: #f9f9f9;
+    margin-left: auto;
+    margin-right: auto;
+    border: #f9f9f9;
+    padding: 20px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 15px;
+    flex: 1 0 100%; /* Ensure they fit within the 400px width */
+    box-sizing: border-box;
+}
+
+body .login-container {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+body .create-container {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+body .create-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    background-color: #f9f9f9;
+    margin-left: auto;
+    margin-right: auto;
+    border: #f9f9f9;
+    padding: 20px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 15px;
+    flex: 1 0 100%; /* Ensure they fit within the 400px width */
+    box-sizing: border-box;
+}
+
+.login-block .form-row {
+    padding: 4px 0;
+}
+
+.login-block .form-row label {
+    display: block;
+    line-height: 2em;
+}
+
+.login-block #id_username, .login-block #id_password1, .login-block #id_password2 {
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    position: absolute;
+    bottom:0;
+    width: 100%;
+}
+
+.button-holder {
+    width: 100%;
+    display: flex;
+}
+
+button {
+    margin: auto;
+}

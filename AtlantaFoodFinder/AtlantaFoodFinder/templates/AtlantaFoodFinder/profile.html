@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +7,8 @@
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'AtlantaFoodFinder/homepage.css' %}"> <!-- Link your CSS file here -->
+    <link rel="stylesheet" href="../../static/AtlantaFoodFinder/profile.css"> <!-- Link your CSS file here -->
     <title>Atlanta Food Finder</title>
-
 </head>
 <body>
     <header>
@@ -36,24 +34,30 @@
             </ul>
         </nav>
     </header>
+    <main class="profile-container">
+        <h1>
+            Welcome {{ user.username }}!
+        </h1>
+        {% if favorites_empty %}
+            <div class="favorite-section">
+                <h2>Favorites</h2>
+                You have no favorites. Once you add some, they'll appear here.
+            </div>
+        {% else %}
+            <div class="favorite-section">
+                <h2>Favorites</h2>
 
-    <main>
-        <section class="hero">
-            <h2>Search for the</h2>
-            <h3>Best Food in Atlanta</h3>
-            <p>FIND THE TOP RATED RESTAURANTS THROUGHOUT THE CITY</p>
-            <form class="search-form" method="POST" action="/places/">
-                {% csrf_token %}
-                <input type="text" id="search_term" name="search_term" placeholder="Enter a cuisine, name, or location..." required/>
-                <input type="image" id="submit" src="../../static/AtlantaFoodFinder/images/search-icon.png" alt="Search" />
-            </form>
-        </section>
+                {% for favorite in user.account.favorites.all %}
+                    <div class="favorite-info">
+                        <a href="{% url "location" favorite.place_id %}">{{ favorite.name }}</a>
+                    </div>
+                {% endfor %}
 
-
+            </div>
+        {% endif %}
     </main>
     <footer>
         <p>&copy; 2024 Atlanta Food Finder. All rights reserved.</p>
     </footer>
-
 </body>
 </html>

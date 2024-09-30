@@ -1,10 +1,10 @@
-/* General Styling */
+/* location.css */
+
 body {
     font-family: 'Inter', sans-serif;
+    background-color: #f5f5f5;
     margin: 0;
     padding: 0;
-    background-color: #FFD6D6;
-    color: #333;
 }
 
 header {
@@ -62,121 +62,114 @@ nav .nav-links li a:hover {
     color: #FFD700;
 }
 
-.hero {
-    margin: 0 auto; /* Centers the section horizontally */
-    padding-top: 100px;
-}
 
-.hero h2 {
-    color: #fff;
-    font-family: 'Fredoka One', cursive;
-    font-size: 50px;
-    margin-bottom: 10px;
-    width: 30%; /* Adjust width as needed */
-    margin: 0 auto; /* Centers the section horizontally */
-    text-align: left; /* Ensures text inside is left-aligned */
-}
-
-.hero h3 {
-    margin: 0 auto; /* Centers the section horizontally */
-    margin-top: 10px;
-    margin-bottom: 20px;
-    color: #000000;
-    font-family: 'Fredoka One', cursive;
-    font-size: 50px;
-    width: fit-content;/* Makes the text fit the background's shape */
-    background-color: #FFD40D;
-    padding: 0px 30px; /* Adds padding around the text */
-    border-radius: 40px; /* Rounds the corners */
-    font-weight: bold;
+.location-name {
     text-align: center;
+    margin: 20px 0;
 }
 
-.hero p {
-    color: #fff;
+.location-name h1 {
     font-family: 'Fredoka One', cursive;
-    font-size: 15px;
-    margin-top: 20px;
-    width: 30%;
-    margin: 0 auto; /* Centers the section horizontally */
-    text-align: left; /* Ensures text inside is left-aligned */
+    font-size: 36px;
+    color: #333;
 }
 
+.location-description, .rating, .contact-info, .address {
+    text-align: center;
+    font-size: 18px;
+    margin: 10px 0;
+    color: #555;
+}
 
+.rating {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff8800;
+}
 
-
-.search-form {
+.favorites-button {
     display: flex;
-    justify-content: flex-start; /* Aligns items to the left */
-    gap: 10px; /* Space between items */
-    flex-wrap: wrap; /* Allows items to wrap to the next line */
-    width: 500px; /* Set the width of the form container */
-    margin: 0 auto;
-    padding-top: 25px;
-    box-sizing: border-box;
+    justify-content: center;
+    margin: 15px 0;
 }
 
-.search-form #name,
-.search-form #search_term {
-    padding: 20px; /* Adjust padding as needed */
+.favorites-button button {
+    background-color: #ff8800;
+    color: white;
     border: none;
-    border-radius: 15px;
-    flex: 1 0 100%; /* Takes up the full width on its own line */
-    box-sizing: border-box;
-}
-
-.search-form #type,
-.search-form #location {
-    padding: 20px; /* Adjust padding as needed */
-    border: none;
-    border-radius: 15px;
-    flex: 1 0 calc(50% - 15px); /* Ensure they fit within the 400px width */
-    box-sizing: border-box;
-}
-
-.search-form button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #FFD700;
-    color: #333;
-    font-weight: bold;
-    border-radius: 5px;
+    padding: 10px 15px;
+    font-family: 'Inter', sans-serif;
     cursor: pointer;
-    flex: 1 0 100%; /* Ensures the button takes the full width */
-    margin-top: 10px;
+    transition: background-color 0.3s;
 }
 
-.search-form #submit {
+.favorites-button button:hover {
+    background-color: #ff6f00;
+}
+
+iframe {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-}
-
-.search-form button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #FFD700;
-    color: #333;
-    font-weight: bold;
+    margin: 20px auto;
+    border: 3px solid #ddd;
     border-radius: 5px;
-    cursor: pointer;
 }
 
-.search-form button:hover {
-    background-color: #ffa500;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
+h3 {
     text-align: center;
-    font-size: 14px;
-    flex-shrink: 0;
-    position: absolute;
-    bottom:0;
-    width: 100%;
+    font-family: 'Fredoka One', cursive;
+    font-size: 28px;
+    margin-top: 30px;
+    color: #333;
 }
 
+.review {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px auto;
+    width: 60%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+.review-user {
+    font-weight: bold;
+    color: #333;
+}
 
+.review-score {
+    color: #ff8800;
+    font-weight: bold;
+}
+
+.review-date {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.review-text {
+    margin-top: 10px;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    iframe {
+        width: 90%;
+        height: 300px;
+    }
+
+    .review {
+        width: 90%;
+    }
+}

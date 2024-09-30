@@ -1,0 +1,182 @@
+/* General Styling */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FFD6D6;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 5px 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2%;
+}
+
+nav .logo h1 {
+    font-family: 'Fugaz One', cursive;
+    font-size: 30px;
+    color: #EE3A43;
+    padding-left: 50px;
+}
+
+nav .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 80px;
+}
+
+nav .nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
+}
+
+nav .nav-links li a:hover {
+    color: #FFD700;
+}
+
+.link-button {
+    background-color: #333;
+    border: none;
+    list-style: none;
+    display: flex;
+    gap: 80px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.link-button:hover {
+    color: #FFD700;
+}
+
+.hero {
+    margin: 0 auto; /* Centers the section horizontally */
+    padding-top: 100px;
+}
+
+.hero h2 {
+    color: #fff;
+    font-family: 'Fredoka One', cursive;
+    font-size: 50px;
+    margin-bottom: 10px;
+    width: 30%; /* Adjust width as needed */
+    margin: 0 auto; /* Centers the section horizontally */
+    text-align: left; /* Ensures text inside is left-aligned */
+}
+
+.hero h3 {
+    margin: 0 auto; /* Centers the section horizontally */
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #000000;
+    font-family: 'Fredoka One', cursive;
+    font-size: 50px;
+    width: fit-content;/* Makes the text fit the background's shape */
+    background-color: #FFD40D;
+    padding: 0px 30px; /* Adds padding around the text */
+    border-radius: 40px; /* Rounds the corners */
+    font-weight: bold;
+    text-align: center;
+}
+
+.hero p {
+    color: #fff;
+    font-family: 'Fredoka One', cursive;
+    font-size: 15px;
+    margin-top: 20px;
+    width: 30%;
+    margin: 0 auto; /* Centers the section horizontally */
+    text-align: left; /* Ensures text inside is left-aligned */
+}
+
+
+
+
+.search-form {
+    display: flex;
+    justify-content: flex-start; /* Aligns items to the left */
+    gap: 10px; /* Space between items */
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    width: 500px; /* Set the width of the form container */
+    margin: 0 auto;
+    padding-top: 25px;
+    box-sizing: border-box;
+}
+
+.search-form #name,
+.search-form #search_term {
+    padding: 20px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 15px;
+    flex: 1 0 100%; /* Takes up the full width on its own line */
+    box-sizing: border-box;
+}
+
+.search-form #type,
+.search-form #location {
+    padding: 20px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 15px;
+    flex: 1 0 calc(50% - 15px); /* Ensure they fit within the 400px width */
+    box-sizing: border-box;
+}
+
+.search-form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #FFD700;
+    color: #333;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 1 0 100%; /* Ensures the button takes the full width */
+    margin-top: 10px;
+}
+
+.search-form #submit {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.search-form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #FFD700;
+    color: #333;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #ffa500;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    position: absolute;
+    bottom:0;
+    width: 100%;
+}
+
+
+

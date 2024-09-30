@@ -3,14 +3,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.views import generic
-from .models import Location, Account
+from .models import Location, Account, Review
 from django.shortcuts import render
 import requests
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
+
 from geopy.distance import geodesic
 from django.http import JsonResponse
+from django.utils import timezone
+
 
 from .secrets import get_api_key
 import json
@@ -73,6 +76,24 @@ def remove_favorite(request, pk):
         if hasattr(request.user, "account"):
             request.user.account.remove_favorite(Location.get_or_init(pk))
             # no else condition since don't need to create an account if they just want to remove
+        return HttpResponseRedirect(reverse("location", kwargs={"pk":pk}))
+
+@login_required
+def add_review(request, pk):
+    if request.method != 'POST':
+        return HttpResponseRedirect(reverse("location", kwargs={"pk":pk}))
+    else:
+        score = int(request.POST['score'])
+        if score > 5:
+            score = 5
+        if score < 0:
+            score = 0
+        Review.objects.create(user=request.user.username,
+                              location=Location.get_or_init(pk),
+                              score=score,
+                              date=timezone.now(),
+                              text=request.POST['text'],
+                              )
         return HttpResponseRedirect(reverse("location", kwargs={"pk":pk}))
 
 def account_creation(request):

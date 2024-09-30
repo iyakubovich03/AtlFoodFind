@@ -45,6 +45,15 @@
             <form class="search-form" method="POST" action="/places/">
                 {% csrf_token %}
                 <input type="text" id="search_term" name="search_term" placeholder="Enter a cuisine, name, or location..." required/>
+                 <br>
+                <label>
+                    <input type="checkbox" name="filter_rating" value="1"> Filter by rating (4.0+)
+                </label>
+                <br>
+                <label>
+                    <input type="checkbox" name="filter_distance" value="1"> Filter by distance (5km)
+                </label>
+                <br>
                 <input type="image" id="submit" src="../../static/AtlantaFoodFinder/images/search-icon.png" alt="Search" />
             </form>
         </section>

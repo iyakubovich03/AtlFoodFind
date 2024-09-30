@@ -9,7 +9,8 @@ import requests
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
-
+from geopy.distance import geodesic
+from django.http import JsonResponse
 
 from .secrets import get_api_key
 import json
@@ -90,6 +91,8 @@ def account_creation(request):
 
 def search_restaurants(request):
    cuisine = request.POST.get('search_term', 'restaurant')
+   rating=request.POST.get('rating')
+   location=request.POST.get('location')
    if cuisine != "restaurant":
        cuisine+="_restaurant"
 
@@ -113,7 +116,7 @@ def search_restaurants(request):
    header = {
    "Content-Type": 'application/json',
    "X-Goog-Api-Key": api_key,
-   "X-Goog-FieldMask": "places.displayName,places.name"
+   "X-Goog-FieldMask": "places.displayName,places.name,places.rating,place.location"
    }
 
 
@@ -128,8 +131,39 @@ def search_restaurants(request):
    else:
 
        results = response.json()
+       return results
+
+    newData=[]
+
+    #cant iterate?
+    for po in results.get('places', []):
+        latitude = po.get('location').get('latitude')
+        longitude = po.get('location').get('longitude')
+        user_location = (33.7490, -84.3880)
+        restaurant_location = (latitude, longitude)
+        distance = geodesic(user_location, restaurant_location).kilometers
+        newData.append({
+            'name': po.get('displayName').get('text'),
+            'placeId': po.get('name'),
+            'rating': po.get('rating'),
+            'distance_km': distance,
+        })
+    if rating and location:
+        #add to this figure out
+        return render(request, 'AtlantaFoodFinder/results.html',
+                          {'search_text': request.POST.get('search_term'), 'results': obj})
+    elif rating:
+        sorted_by_distance = sorted(newData, key=lambda x: x['rating'])
+        obj = JsonResponse(sorted_by_distance, safe=False)
+        return render(request, 'AtlantaFoodFinder/results.html',
+                         {'search_text': request.POST.get('search_term'), 'results': obj})
+    elif location:
+        sorted_by_distance = sorted(newData, key=lambda x: x['rating'])
+        obj = JsonResponse(sorted_by_distance, safe=False)
+        return render(request, 'AtlantaFoodFinder/results.html',{'search_text': request.POST.get('search_term'), 'results': obj})
+    else:
+        obj=JsonResponse(newData, safe=False)
+        return render(request, 'AtlantaFoodFinder/results.html',{'search_text': request.POST.get('search_term'), 'results':obj})
 
 
 
-
-   return render(request, 'AtlantaFoodFinder/results.html', {'search_text': request.POST.get('search_term'), 'results': results})

@@ -180,16 +180,3 @@ nav .nav-links li a:hover {
 .search-form button:hover {
     background-color: #ffa500;
 }
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    font-size: 14px;
-    flex-shrink: 0;
-    position: absolute;
-    bottom:0;
-    width: 100%;
-}
-
-

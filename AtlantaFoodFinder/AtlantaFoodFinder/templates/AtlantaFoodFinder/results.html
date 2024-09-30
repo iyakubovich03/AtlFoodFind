@@ -45,19 +45,18 @@
                 <input type="image" id="submit" src="../../static/AtlantaFoodFinder/images/search-icon.png" alt="Search" />
             </form>
         </section>
-        {% for place in results.places %}
-            <div class="restaurant">
-                <h3>
-                    <a href = "{% url 'location' place.name|slice:'7:' %}">{{ place.displayName.text }}</a>
-                </h3>
-            </div>
-        {% empty %}
-            <li>No places found.</li>
-        {% endfor %}
+        <div class="restaurant-list">
+            {% for place in results.places %}
+                <div class="restaurant">
+                    <h3>
+                        <a href = "{% url 'location' place.name|slice:'7:' %}">{{ place.displayName.text }}</a>
+                    </h3>
+                </div>
+            {% empty %}
+                <li>No places found.</li>
+            {% endfor %}
+        </div>
     </main>
-    <footer>
-        <p>&copy; 2024 Atlanta Food Finder. All rights reserved.</p>
-    </footer>
 
 </body>
 </html>

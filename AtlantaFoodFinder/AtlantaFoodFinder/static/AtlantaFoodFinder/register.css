@@ -77,10 +77,6 @@ nav .nav-links li a:hover {
     box-sizing: border-box;
 }
 
-#login-form {
-    width: 100%;
-}
-
 .submit-row {
     padding: 1em 0 0 0;
     margin: 0;
@@ -146,7 +142,7 @@ body .create-block {
     line-height: 2em;
 }
 
-.login-block .form-row #id_username, .login-block .form-row #id_password {
+.login-block #id_username, .login-block #id_password1, .login-block #id_password2 {
     padding: 8px;
     width: 100%;
     box-sizing: border-box;
@@ -163,3 +159,11 @@ footer {
     width: 100%;
 }
 
+.button-holder {
+    width: 100%;
+    display: flex;
+}
+
+button {
+    margin: auto;
+}

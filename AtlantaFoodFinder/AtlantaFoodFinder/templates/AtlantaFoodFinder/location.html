@@ -73,6 +73,18 @@
   allowfullscreen>
 </iframe>
 
+{% if user.is_authenticated %}
+    <h5>Want to leave a review?</h5>
+    <form class="new-review" method="POST" action="{% url 'addReview' location.place_id %}">
+        {% csrf_token %}
+        <input type="number" id="new-score" name="score" placeholder="Enter your score out of five" min="0" max="5">
+        <textarea type="textarea" id="new-text" name="text" placeholder="Enter the text for your review"></textarea>
+        <button type="submit" id="new-submit" name="new-submit">Submit</button>
+    </form>
+{% else %}
+    Not authenticated
+{% endif %}
+
 <h3>Reviews</h3>
 {% for review in location.review_set.all %}
     <div class="review">

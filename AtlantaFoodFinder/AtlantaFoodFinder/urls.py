@@ -31,5 +31,6 @@ urlpatterns = [
     path("accounts/profile/", views.UserView.as_view(), name="profile"),
     path("locations/<pk>/addFavorite", views.add_favorite, name="addFavorite"),
     path("locations/<pk>/removeFavorite", views.remove_favorite, name="removeFavorite"),
+    path("locations/<pk>/addReview", views.add_review, name="addReview"),
     path("accounts/create", views.account_creation, name="signUp")
 ]

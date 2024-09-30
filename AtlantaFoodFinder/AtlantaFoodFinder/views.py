@@ -14,6 +14,7 @@ from geopy.distance import geodesic
 from django.http import JsonResponse
 from django.utils import timezone
 
+import random, string
 
 from .secrets import get_api_key
 import json
@@ -88,7 +89,9 @@ def add_review(request, pk):
             score = 5
         if score < 0:
             score = 0
-        Review.objects.create(user=request.user.username,
+        random_tag = "".join(random.choices(string.ascii_letters, k=64))
+        Review.objects.create(review_id=random_tag,
+                              user=request.user.username,
                               location=Location.get_or_init(pk),
                               score=score,
                               date=timezone.now(),

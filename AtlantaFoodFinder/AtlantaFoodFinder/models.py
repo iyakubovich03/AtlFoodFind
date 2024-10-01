@@ -25,7 +25,10 @@ class Location(models.Model):
     def update_from_web(self):
         updates = query_location_id(self.place_id)
         self.address = updates['formattedAddress']
-        self.contact_info = updates['internationalPhoneNumber']
+        try:
+            self.contact_info = updates['internationalPhoneNumber']
+        except KeyError:
+            pass
         self.rating = updates['rating']
         self.name = updates['displayName']['text']
         self.longitude = updates['location']['longitude']

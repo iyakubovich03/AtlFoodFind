@@ -60,7 +60,11 @@
     </div>
 {% endif %}
 <div class="contact-info">
-    To get in contact, call {{ location.contact_info }}
+    {% if location.contact_info %}
+        To get in contact, call {{ location.contact_info }}
+    {% else %}
+        This location provides no contact info
+    {% endif %}
 </div>
 
 <div class="address">{{ location.address }}</div>

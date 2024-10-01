@@ -71,7 +71,7 @@ class Review(models.Model):
         self.score = review_json['rating']
         self.text = review_json['text']['text']
         self.user = review_json['authorAttribution']['displayName']
-        self.data = parse_date(review_json['publishTime'])
+        self.date = parse_date(review_json['publishTime'])
         self.save()
 
     @classmethod

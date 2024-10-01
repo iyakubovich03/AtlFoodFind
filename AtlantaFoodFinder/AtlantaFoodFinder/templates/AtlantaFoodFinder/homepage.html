@@ -56,20 +56,6 @@
                 <input type="image" id="submit" src="../../../static/AtlantaFoodFinder/images/search-icon.png" alt="Search" />
             </form>
         </section>
-        <div class="restaurant-list">
-            {% for place in results%}
-                <div class="restaurant">
-                    <h3>
-                        <a href = "{% url 'location' place.placeId|slice:'7:' %}">{{ place.name }}</a>
-                    </h3>
-                    <p>{{ place.rating }}</p>
-                    <p>{{ place.distance_km }}</p>
-                </div>
-            {% empty %}
-                <li>No places found.</li>
-            {% endfor %}
-        </div>
-
     </main>
 
 </body>

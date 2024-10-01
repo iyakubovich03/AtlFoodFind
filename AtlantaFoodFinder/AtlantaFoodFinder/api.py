@@ -23,7 +23,7 @@ def parse_date(string_datetime):
     time_components = time[0:-1].split(":") #Remove last character since is always Z
     hour = int(time_components[0])
     minutes = int(time_components[1])
-    seconds = int(time_components[2])
+    seconds = int(float(time_components[2]))
     datetime_result = datetime(year, month, day, hour, minutes, seconds)
     return datetime_result
 

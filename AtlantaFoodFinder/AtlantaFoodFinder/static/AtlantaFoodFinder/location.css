@@ -199,7 +199,6 @@ h3 {
 
 .new-review input[type="number"],
 .new-review textarea {
-    width: 100%;              /* Full width input */
     padding: 10px;            /* Inner padding */
     border: 1px solid #ccc;   /* Border style */
     border-radius: 4px;       /* Rounded corners */

@@ -181,7 +181,6 @@ def search_restaurants(request):
         return render(request, 'AtlantaFoodFinder/results.html',{'search_text': request.POST.get('search_term'), 'results': sorted_by_distance})
     else:
         obj=JsonResponse(data1, safe=False)
-        print(obj)
         return render(request, 'AtlantaFoodFinder/results.html',{'search_text': request.POST.get('search_term'), 'results':data1})
 
 

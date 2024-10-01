@@ -15,7 +15,7 @@ body {
 header {
     background-color: #333;
     color: #fff;
-    padding: 0px 0;
+    padding: 5px 0;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 1);
 }
@@ -56,7 +56,7 @@ nav .nav-links li a:hover {
     border: none;
     list-style: none;
     display: flex;
-    gap: 80px;
+    gap: 0px;
     color: #fff;
     text-decoration: none;
     font-size: 30px;
@@ -67,116 +67,158 @@ nav .nav-links li a:hover {
     color: #FFD700;
 }
 
+/* results.css */
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f9f9f9; /* Clean background without any images */
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .hero {
-    margin: 0 auto; /* Centers the section horizontally */
-    padding-top: 10px;
-}
-
-.hero h2 {
-    color: #fff;
-    font-family: 'Fredoka One', cursive;
-    font-size: 50px;
-    margin-bottom: 10px;
-    width: 30%; /* Adjust width as needed */
-    margin: 0 auto; /* Centers the section horizontally */
-    text-align: left; /* Ensures text inside is left-aligned */
-}
-
-.hero h3 {
-    margin: 0 auto; /* Centers the section horizontally */
-    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #e9ecef;
     margin-bottom: 20px;
-    color: #000000;
-    font-family: 'Fredoka One', cursive;
-    font-size: 50px;
-    width: fit-content;/* Makes the text fit the background's shape */
-    background-color: #FFD40D;
-    padding: 0px 30px; /* Adds padding around the text */
-    border-radius: 40px; /* Rounds the corners */
-    font-weight: bold;
-    text-align: center;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px;
 }
-
-.hero p {
-    color: #fff;
-    font-family: 'Fredoka One', cursive;
-    font-size: 15px;
-    margin-top: 20px;
-    width: 30%;
-    margin: 0 auto; /* Centers the section horizontally */
-    text-align: left; /* Ensures text inside is left-aligned */
-}
-
-.restaurant {
-    background-color: #f9f9f9;
-    padding: 5px;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-}
-
 
 .search-form {
     display: flex;
-    justify-content: flex-start; /* Aligns items to the left */
-    gap: 10px; /* Space between items */
-    flex-wrap: wrap; /* Allows items to wrap to the next line */
-    width: 500px; /* Set the width of the form container */
-    margin: 0 auto;
-    padding-top: 25px;
-    box-sizing: border-box;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
 }
 
-.search-form #name,
-.search-form #search_term {
-    padding: 20px; /* Adjust padding as needed */
-    border: none;
-    border-radius: 15px;
-    flex: 1 0 100%; /* Takes up the full width on its own line */
-    box-sizing: border-box;
+.search-form input[type="text"] {
+    padding: 10px;
+    width: calc(100% - 100px);
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
 }
 
-.search-form #type,
-.search-form #location {
-    padding: 20px; /* Adjust padding as needed */
-    border: none;
-    border-radius: 15px;
-    flex: 1 0 calc(50% - 15px); /* Ensure they fit within the 400px width */
-    box-sizing: border-box;
+.search-form label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #555;
 }
 
-.search-form button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #FFD700;
-    color: #333;
-    font-weight: bold;
-    border-radius: 5px;
+.search-form input[type="radio"] {
+    margin-right: 5px;
+}
+
+.search-form input[type="image"] {
+    width: 100px;
+    height: 30px;
     cursor: pointer;
-    flex: 1 0 100%; /* Ensures the button takes the full width */
-    margin-top: 10px;
-}
-
-.search-form #submit {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-}
-
-.search-form button {
-    padding: 10px 20px;
     border: none;
-    background-color: #FFD700;
-    color: #333;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 0;
+    margin-left: 5px;
+    transition: transform 0.2s;
 }
 
-.search-form button:hover {
-    background-color: #ffa500;
+.search-form input[type="image"]:hover {
+    transform: scale(1.1);
+}
+
+.restaurant-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+    width: 100%;
+    max-width: 800px;
+}
+
+.restaurant {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+.restaurant:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.restaurant h3 {
+    margin: 0 0 5px;
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 20px;
+}
+
+.restaurant h3 a {
+    text-decoration: none;
+    color: #333;
+}
+
+.restaurant h3 a:hover {
+    text-decoration: underline;
+}
+
+.restaurant p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+}
+
+#rating {
+    font-weight: bold;
+    color: #ff8800;
+}
+
+#distance {
+    color: #777;
+}
+
+li {
+    list-style: none;
+    font-size: 18px;
+    color: #888;
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .search-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-form input[type="text"] {
+        width: 100%;
+    }
+
+    .restaurant-list {
+        gap: 10px;
+    }
+
+    .restaurant {
+        padding: 10px;
+    }
+
+    .restaurant h3 {
+        font-size: 18px;
+    }
+
+    .restaurant p {
+        font-size: 14px;
+    }
 }

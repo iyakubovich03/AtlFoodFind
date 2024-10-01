@@ -59,8 +59,9 @@
                     <h3>
                         <a href = "{% url 'location' place.placeId|slice:'7:' %}">{{ place.name }}</a>
                     </h3>
-                    <p>{{ place.rating }}</p>
-                    <p>{{ place.distance_km }}</p>
+                    <p id="rating">Rated {{ place.rating }} out of 5</p>
+                    <p id="distance">{{ place.distance_km|floatformat:1 }} km away</p>
+
                 </div>
             {% empty %}
                 <li>No places found.</li>

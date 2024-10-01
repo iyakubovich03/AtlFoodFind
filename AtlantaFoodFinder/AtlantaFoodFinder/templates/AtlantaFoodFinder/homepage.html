@@ -45,15 +45,17 @@
             <form class="search-form" method="POST" action="/places/">
                 {% csrf_token %}
                 <input type="text" id="search_term" name="search_term" value="{{ search_text }}" placeholder="Enter a cuisine, name, or location..." required/>
-                <label>
-                    <input type="radio" name="sort_option" id = "rating" value="rating">
-                    Rating
-                </label>
-                <label>
-                <input type="radio" name="sort_option" id ="distance" value="distance">
-                Distance
-                </label>
-                <input type="image" id="submit" src="../../../static/AtlantaFoodFinder/images/search-icon.png" alt="Search" />
+                <div class="search-options-box">
+                    <label>
+                        <input type="radio" name="sort_option" id="rating" value="rating">
+                        Rating
+                    </label>
+                    <label>
+                        <input type="radio" name="sort_option" id="distance" value="distance">
+                        Distance
+                    </label>
+                    <input type="image" id="submit" src="../../../static/AtlantaFoodFinder/images/search-icon.png" alt="Search" />
+                </div>
             </form>
         </section>
         <div class="restaurant-list">
@@ -66,7 +68,6 @@
                     <p>{{ place.distance_km }}</p>
                 </div>
             {% empty %}
-                <li>No places found.</li>
             {% endfor %}
         </div>
 

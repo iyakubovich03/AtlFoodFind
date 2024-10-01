@@ -173,3 +173,65 @@ h3 {
         width: 90%;
     }
 }
+
+
+/* Styling for the 'Add Review' form */
+.new-review {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;                /* Space between elements */
+    max-width: 600px;         /* Limit the form width */
+    margin: 20px auto;        /* Center the form */
+    padding: 15px;            /* Add padding inside the form */
+    border: 1px solid #ccc;   /* Light gray border */
+    border-radius: 8px;       /* Rounded corners */
+    background-color: #f9f9f9; /* Subtle background color */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+.new-review h5 {
+    width: 100%;           /* Ensure h5 takes full width of the parent container */
+    display: block;        /* Ensure it's treated as a block element */
+    text-align: center;    /* Center the text */
+    margin: 0 auto 10px;   /* Adjust margins to center it properly */
+}
+
+
+.new-review input[type="number"],
+.new-review textarea {
+    width: 100%;              /* Full width input */
+    padding: 10px;            /* Inner padding */
+    border: 1px solid #ccc;   /* Border style */
+    border-radius: 4px;       /* Rounded corners */
+    font-size: 16px;          /* Font size */
+    font-family: 'Inter', sans-serif; /* Font */
+    resize: vertical;         /* Allow vertical resizing of textarea */
+}
+
+.new-review input[type="number"]::placeholder,
+.new-review textarea::placeholder {
+    color: #999;              /* Placeholder color */
+}
+
+.new-review button {
+    padding: 10px 15px;       /* Padding for the button */
+    border: none;             /* Remove border */
+    background-color: #ff8800; /* Button color */
+    color: #fff;              /* Text color */
+    font-size: 16px;          /* Font size */
+    font-family: 'Inter', sans-serif;
+    border-radius: 4px;       /* Rounded corners */
+    cursor: pointer;          /* Pointer cursor */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.new-review button:hover {
+    background-color: #ff6f00; /* Darker shade on hover */
+}
+
+.new-review input:focus,
+.new-review textarea:focus {
+    outline: none;            /* Remove default outline */
+    border-color: #ff8800;    /* Highlight border on focus */
+    box-shadow: 0px 0px 5px rgba(255, 136, 0, 0.3); /* Add shadow */
+}

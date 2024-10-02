@@ -38,16 +38,21 @@
 
     <main>
     <section class="favorites">
+        <h2>Welcome, {{ user.username }}!</h2>
         <h2>★ Favorites</h2>
         {% for favorite in user.account.favorites.all %}
         <div class="favorite-item">
             <!-- Restaurant Name Link -->
             <a href="{% url 'location' favorite.place_id %}" class="restaurant-name">{{ favorite.name }}</a>
             <!-- Restaurant Info -->
-            <span class="restaurant-info">{{ favorite.cuisine }} {{ favorite.price_range }}</span>
+            <span class="restaurant-info">{{ favorite.cuisine }}</span>
             <!-- Favorite Icon -->
             <span class="favorite-icon">★</span>
         </div>
+        {% empty %}
+            <div class="favorite-item">
+                Once you add favorites, they'll be displayed here
+            </div>
         {% endfor %}
     </section>
 </main>

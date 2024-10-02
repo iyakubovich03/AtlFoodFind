@@ -35,16 +35,24 @@ nav .nav-links {
     gap: 80px;
 }
 
-nav .nav-links li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 30px;
-    font-family: 'Oswald', sans-serif;
+/* Style for navigation links including logout button */
+.nav-links li a,
+.link-button {
+    color: #fff;                    /* White text color */
+    text-decoration: none;          /* No underline */
+    font-size: 30px;                /* Match font size */
+    font-family: 'Oswald', sans-serif; /* Match font family */
+    background: none;               /* No background for button */
+    border: none;                   /* Remove border */
+    cursor: pointer;                /* Pointer cursor on hover */
+    padding: 0;                     /* Remove padding */
 }
 
-nav .nav-links li a:hover {
-    color: #FFD700;
+.nav-links li a:hover,
+.link-button:hover {
+    color: #FFD700;                 /* Change color on hover */
 }
+
 
 main {
     padding: 20px;
@@ -68,11 +76,20 @@ main {
     color: #333;
 }
 
+/* Increase specificity to target links inside favorite-item */
 .favorite-item .restaurant-name {
-    font-weight: bold;
+    font-weight: 900; /* Extra bold */
+    font-size: 30px;  /* Bigger text */
+    color: #333;
+    text-decoration: none;
 }
 
-.favorite-item .restaurant-info {
+.favorite-item .restaurant-name:hover {
+    color: #EE3A43; /* Hover effect */
+}
+
+
+.restaurant-info {
     color: #666;
     margin-left: 10px;
 }
@@ -81,4 +98,3 @@ main {
     color: #FF4500;
     font-size: 24px;
 }
-

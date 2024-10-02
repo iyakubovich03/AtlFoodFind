@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../static/AtlantaFoodFinder/profile.css"> <!-- Link your CSS file here -->
+    <link rel="stylesheet" href="../../static/AtlantaFoodFinder/favorites.css"> <!-- Link your CSS file here -->
     <title>Atlanta Food Finder</title>
 </head>
 <body>
@@ -21,11 +21,12 @@
                 <li><a href="{% url "profile" %}">Profile</a></li>
                 {% if user.is_authenticated %}
                     <li>
-                        <form id="logout-form" method="post" action="{% url "logout" %}">
+                        <form id="logout-form" method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
                             <button type="submit" class="link-button">Logout</button>
                         </form>
                     </li>
+
                 {% else %}
                     <li><a href="{% url "login" %}">
                         Login
@@ -34,27 +35,24 @@
             </ul>
         </nav>
     </header>
-    <main class="profile-container">
-        <h1>
-            Welcome {{ user.username }}!
-        </h1>
-        {% if favorites_empty %}
-            <div class="favorite-section">
-                <h2>Favorites</h2>
-                You have no favorites. Once you add some, they'll appear here.
-            </div>
-        {% else %}
-            <div class="favorite-section">
-                <h2>Favorites</h2>
 
-                {% for favorite in user.account.favorites.all %}
-                    <div class="favorite-info">
-                        <a href="{% url "location" favorite.place_id %}">{{ favorite.name }}</a>
-                    </div>
-                {% endfor %}
+    <main>
+    <section class="favorites">
+        <h2>★ Favorites</h2>
+        {% for favorite in user.account.favorites.all %}
+        <div class="favorite-item">
+            <!-- Restaurant Name Link -->
+            <a href="{% url 'location' favorite.place_id %}" class="restaurant-name">{{ favorite.name }}</a>
+            <!-- Restaurant Info -->
+            <span class="restaurant-info">{{ favorite.cuisine }} {{ favorite.price_range }}</span>
+            <!-- Favorite Icon -->
+            <span class="favorite-icon">★</span>
+        </div>
+        {% endfor %}
+    </section>
+</main>
 
-            </div>
-        {% endif %}
-    </main>
+
+
 </body>
 </html>
